@@ -39,3 +39,11 @@ class User(UserMixin,db.Model):
 
     def __repr__(self):
         return f'User {self.username}'
+    @classmethod
+    def check_role(cls,user_id,role_id):
+        get_role = User.query.filter_by(id=user_id).filter_by(role_id=role_id).first()
+        return get_role
+
+    def save_user(self):
+        db.session.add(self)
+        db.session.commit()
