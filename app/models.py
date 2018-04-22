@@ -13,13 +13,18 @@ class Role(db.Model):
     name = db.Column(db.String)
     users = db.relationship('User', backref='role', lazy='dynamic')
 
-class User(db.Model):
+    def __repr__(self):
+        returnf'User {self.name}'
+
+class User(UserMixin,db.Model):
     __tablename__= 'users'
     id = db.Column(db.Integer,primary_key = True)
     username = db.Column(db.String(244))
     email = db.Column(db.String(50), unique=True, index=True)
     password_hash = db.Column(db.String(20))
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
+    posts = db.relationship('Post',backref='user', lazy='dynamic')
+    comments = db.relationship('Comment', backref='user', lazy='dynamic')
 
 
     def __repr__(self):
