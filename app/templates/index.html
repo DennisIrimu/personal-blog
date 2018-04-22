@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% import 'macros.html' as macro %}
+
+{% block content %}
+    <title> {{ title }} </title>
+
+    <h3> Current Posts </h3>
+
+    {{ macro.displayPostList(posts)}}
+
+{% endblock %}
