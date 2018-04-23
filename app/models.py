@@ -62,4 +62,6 @@ class Post(db.Model):
     user_id=db.Column(db.Integer, db.ForeignKey("users.id"))
     comments = db.relationship('Comment', backref='post', lazy='dynamic', )
 
-    
+    def save_post(self):
+        db.session.add(self)
+        db.session.commit()
