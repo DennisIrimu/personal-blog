@@ -52,3 +52,14 @@ class User(UserMixin,db.Model):
     def save_user(self):
         db.session.add(self)
         db.session.commit()
+
+class Post(db.Model):
+
+    __tablename__='posts'
+    id=db.Column(db.Integer, primary_key = True)
+    post_title=db.Column(db.String)
+    post_content=db.Column(db.String)
+    user_id=db.Column(db.Integer, db.ForeignKey("users.id"))
+    comments = db.relationship('Comment', backref='post', lazy='dynamic', )
+
+    
